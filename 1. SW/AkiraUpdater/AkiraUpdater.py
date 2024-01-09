@@ -99,44 +99,53 @@ def main():
         return
 
     root = tk.Tk()
-    root.title("ESP32 ROM Flasher")
-    root.geometry("400x400")
+    root.title("Akira Game Console Updater")
+    root.geometry("650x460")
+    root.configure(bg="#333333")
 
     style = ttk.Style(root)
     style.theme_use("clam")
-
-    frame = ttk.Frame(root, padding="10")
-    frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
-
-    ttk.Label(frame, text="Selected Chip:", font=("Arial", 12)).grid(
-        row=0, column=0, sticky=tk.W, pady=5
+    style.configure(
+        "TButton", foreground="#FFFFFF", background="#FF5733", font=("Arial", 12)
     )
-    ttk.Label(frame, text="esp32", font=("Arial", 12)).grid(
-        row=0, column=1, sticky=tk.W, pady=5
+    style.configure(
+        "TLabel", foreground="#FFFFFF", background="#333333", font=("Arial", 12)
+    )
+    style.configure("TFrame", background="#333333")
+    style.map("TButton", background=[("active", "#FF8C33")])
+
+    frame = ttk.Frame(root)
+    frame.grid(row=0, column=0, padx=50, pady=50)
+
+    ttk.Label(
+        frame, text="Akira Game Console Updater", font=("Arial", 20, "bold")
+    ).grid(row=0, column=0, columnspan=3, pady=20)
+    ttk.Label(frame, text="Selected Chip: esp32", font=("Arial", 12)).grid(
+        row=1, column=0, sticky=tk.W, pady=5
     )
 
     available_ports = [port.device for port in serial.tools.list_ports.comports()]
     port_var = tk.StringVar(root)
     port_var.set(available_ports[0] if available_ports else "No COM Ports Available")
     ttk.Label(frame, text="Select Port:", font=("Arial", 12)).grid(
-        row=1, column=0, sticky=tk.W, pady=5
+        row=2, column=0, sticky=tk.W, pady=5
     )
     ttk.OptionMenu(frame, port_var, *available_ports).grid(
-        row=1, column=1, sticky=tk.W, pady=5
+        row=2, column=1, sticky=tk.W, pady=5
     )
 
     for index, (address, _, size) in enumerate(flash_data):
         ttk.Label(frame, text=f"ROM {index + 1}").grid(
-            row=index + 2, column=0, sticky=tk.W, pady=5
+            row=index + 3, column=0, sticky=tk.W, pady=5
         )
         ttk.Label(frame, text=f"Address: {address} | Size: {size}KB").grid(
-            row=index + 2, column=1, sticky=tk.W, pady=5
+            row=index + 3, column=1, sticky=tk.W, pady=5
         )
         ttk.Button(
             frame,
             text=f"Select ROM {index + 1} File",
             command=lambda i=index: select_file(i),
-        ).grid(row=index + 2, column=2, sticky=tk.W, pady=5)
+        ).grid(row=index + 3, column=2, sticky=tk.W, pady=5)
 
     ttk.Button(
         frame,
@@ -152,7 +161,7 @@ def main():
             for i in range(len(flash_data))
         ],
         width=20,
-    ).grid(row=len(flash_data) + 2, columnspan=3, pady=10)
+    ).grid(row=len(flash_data) + 3, columnspan=3, pady=20)
 
     root.mainloop()
 
