@@ -6,6 +6,7 @@ from tkinter import ttk
 from tkinter import filedialog
 import serial.tools.list_ports
 
+
 # Define the addresses and sizes
 flash_data = [
     ("0x69000", "rom01.bin", 100),
