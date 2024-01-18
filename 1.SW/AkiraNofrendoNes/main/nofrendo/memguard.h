@@ -25,7 +25,7 @@
 
 #ifndef _MEMGUARD_H_
 #define _MEMGUARD_H_
-
+#include <stdbool.h>
 #ifdef strdup
 #undef strdup
 #endif

@@ -25,22 +25,22 @@
 
 #include <math.h>
 #include <string.h>
-#include <noftypes.h>
-#include <bitmap.h>
-#include <nofconfig.h>
-#include <event.h>
-#include <gui.h>
-#include <log.h>
-#include <nes.h>
-#include <nes_pal.h>
-#include <nesinput.h>
-#include <osd.h>
+#include <stdbool.h>
+#include "../nofrendo/noftypes.h"
+#include "../nofrendo/bitmap.h"
+#include "../nofrendo/nofconfig.h"
+#include "../nofrendo/event.h"
+#include "../nofrendo/gui.h"
+#include "../nofrendo/log.h"
+#include "../nofrendo/nes/nes.h"
+#include "../nofrendo/nes/nes_pal.h"
+#include "../nofrendo/nes/nesinput.h"
+#include "../nofrendo/osd.h"
 #include <stdint.h>
 #include "driver/i2s.h"
 #include "sdkconfig.h"
-#include <spi_lcd.h>
-
-#include <psxcontroller.h>
+#include "spi_lcd.h"
+#include "psxcontroller.h"
 
 #define DEFAULT_SAMPLERATE 33252 * 2 // 22100
 #define DEFAULT_FRAGSIZE 128

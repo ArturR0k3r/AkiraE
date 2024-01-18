@@ -27,6 +27,7 @@
 #define _NES_PPU_H_
 
 #include "bitmap.h"
+#include <stdbool.h>
 
 /* PPU register defines */
 #define PPU_CTRL0 0x2000

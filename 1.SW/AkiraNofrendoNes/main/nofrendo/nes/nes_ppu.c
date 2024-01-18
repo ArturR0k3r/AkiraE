@@ -25,6 +25,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "noftypes.h"
 #include "nes_ppu.h"
 #include "nes.h"

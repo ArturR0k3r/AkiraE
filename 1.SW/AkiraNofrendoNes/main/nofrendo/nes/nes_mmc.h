@@ -33,14 +33,14 @@
 
 typedef struct
 {
-   uint32 min_range, max_range;
-   uint8 (*read_func)(uint32 address);
+   uint32_t min_range, max_range;
+   uint8_t (*read_func)(uint32_t address);
 } map_memread;
 
 typedef struct
 {
-   uint32 min_range, max_range;
-   void (*write_func)(uint32 address, uint8 value);
+   uint32_t min_range, max_range;
+   void (*write_func)(uint32_t address, uint8_t value);
 } map_memwrite;
 
 typedef struct mapintf_s

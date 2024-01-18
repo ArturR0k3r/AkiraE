@@ -3,14 +3,14 @@
 **
 **
 ** This program is free software; you can redistribute it and/or
-** modify it under the terms of version 2 of the GNU Library General 
+** modify it under the terms of version 2 of the GNU Library General
 ** Public License as published by the Free Software Foundation.
 **
-** This program is distributed in the hope that it will be useful, 
+** This program is distributed in the hope that it will be useful,
 ** but WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU 
-** Library General Public License for more details.  To obtain a 
-** copy of the GNU Library General Public License, write to the Free 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+** Library General Public License for more details.  To obtain a
+** copy of the GNU Library General Public License, write to the Free
 ** Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 **
 ** Any permitted reproduction of these routines, in whole or in part,
@@ -26,17 +26,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <noftypes.h>
-#include <nofrendo.h>
-#include <event.h>
-#include <nofconfig.h>
-#include <log.h>
-#include <osd.h>
-#include <gui.h>
-#include <vid_drv.h>
 
+#include "../nofrendo/noftypes.h"
+#include "../nofrendo/bitmap.h"
+#include "../nofrendo/nofconfig.h"
+#include "../nofrendo/event.h"
+#include "../nofrendo/gui.h"
+#include "../nofrendo/log.h"
+#include "../nofrendo/nes/nes.h"
+#include "../nofrendo/nes/nes_pal.h"
+#include "../nofrendo/nes/nesinput.h"
+#include "../nofrendo/osd.h"
+#include <stdint.h>
 /* emulated system includes */
-#include <nes.h>
 
 /* our global machine structure */
 static struct
@@ -44,7 +46,7 @@ static struct
    char *filename, *nextfilename;
    system_t type, nexttype;
 
-   union 
+   union
    {
       nes_t *nes;
    } machine;
@@ -129,16 +131,16 @@ static system_t detect_systemtype(const char *filename)
 
    if (0 == nes_isourfile(filename))
       return system_nes;
-   
+
    /* can't figure out what this thing is */
    return system_unknown;
 }
 
 static int install_timer(int hertz)
 {
-   return osd_installtimer(hertz, (void *) timer_isr,
-                           (int) timer_isr_end - (int) timer_isr,
-                           (void *) &nofrendo_ticks, 
+   return osd_installtimer(hertz, (void *)timer_isr,
+                           (int)timer_isr_end - (int)timer_isr,
+                           (void *)&nofrendo_ticks,
                            sizeof(nofrendo_ticks));
 }
 
@@ -177,7 +179,7 @@ static int internal_insert(const char *filename, system_t type)
 
       nes_emulate();
       break;
-   
+
    case system_unknown:
    default:
       log_printf("system type unknown, playing nofrendo NES intro.\n");
@@ -209,7 +211,7 @@ int nofrendo_main(int argc, char *argv[])
    console.nexttype = system_unknown;
    console.refresh_rate = 0;
    console.quit = false;
-   
+
    if (log_init())
       return -1;
 
@@ -224,7 +226,7 @@ int main_loop(const char *filename, system_t type)
    vidinfo_t video;
 
    /* register shutdown, in case of assertions, etc. */
-//   atexit(shutdown_everything);
+   //   atexit(shutdown_everything);
 
    if (config.open())
       return -1;
@@ -238,7 +240,7 @@ int main_loop(const char *filename, system_t type)
    osd_getvideoinfo(&video);
    if (vid_init(video.default_width, video.default_height, video.driver))
       return -1;
-	printf("vid_init done\n");
+   printf("vid_init done\n");
 
    console.nextfilename = strdup(filename);
    console.nexttype = type;

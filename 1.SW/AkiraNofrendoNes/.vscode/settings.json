@@ -45,6 +45,15 @@
         "gui.h": "c",
         "vid_drv.h": "c",
         "nes_pal.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "osd.h": "c",
+        "event.h": "c",
+        "nofconfig.h": "c",
+        "bitmap.h": "c",
+        "i2s.h": "c",
+        "stdint.h": "c",
+        "spi_lcd.h": "c",
+        "stdbool.h": "c",
+        "functional": "c"
     }
 }

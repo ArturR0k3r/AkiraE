@@ -27,7 +27,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <noftypes.h>
-#include <nes_ppu.h>
+#include <nes_ppu.h
 #include <nes_apu.h>
 #include <nesinput.h>
 #include <nes.h>

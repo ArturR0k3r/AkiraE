@@ -812,10 +812,12 @@ void apu_write(uint32 address, uint8 value)
 }
 
 /* Read from $4000-$4017 */
-uint8 apu_read(uint32 address)
+#include <stdint.h>
+
+// Forward declaration for apu_read function
+uint8_t apu_read(uint32_t address)
 {
    uint8 value;
-
    switch (address)
    {
    case APU_SMASK:
@@ -847,7 +849,7 @@ uint8 apu_read(uint32 address)
       break;
    }
 
-   return value;
+   return (uint8)value;
 }
 
 #define CLIP_OUTPUT16(out)    \
