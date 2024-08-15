@@ -1,2 +1,3 @@
 # AkiraE
-Akira Retro Gaming Consoles
+Akira Retro Gaming Console
+
